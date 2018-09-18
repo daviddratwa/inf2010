@@ -10,7 +10,8 @@ public class ArrayQueue<AnyType> implements Queue<AnyType>
 	public ArrayQueue() 
 	{
 		//A completer
-		
+		 table = (AnyType[]) new Object[1]; 
+		 
 		
 	}
 	
@@ -32,7 +33,9 @@ public class ArrayQueue<AnyType> implements Queue<AnyType>
 	public AnyType peek()
 	{
 		//A completer
-		
+		if (size == 0) 
+			return null; 
+		else return table[size-1];
 		
 		
 	}
@@ -42,16 +45,31 @@ public class ArrayQueue<AnyType> implements Queue<AnyType>
 	public void pop() throws EmptyQueueException
 	{
 		//A completer
+		table[size]= null;
+		size--; 
 		
 	}
 	
 	//Ajoute un element a la fin de la file
 	//Double la taille de la file si necessaire (utiliser la fonction resize definie plus bas)
 	//complexité asymptotique: O(1) ( O(N) lorsqu'un redimensionnement est necessaire )
+	@SuppressWarnings("unchecked")
 	public void push(AnyType item)
 	{
-		//A completer
 		
+		//A completer
+		if (size == table.length) { 
+			AnyType[] tabTemp = (AnyType[]) new Object[2*table.length];   
+			for (int i = 0; i < size; i++) { 
+				tabTemp[i] = table[i]; 
+			}
+			
+			
+			table = tabTemp; 
+		}
+		
+		table[size] = item; 
+		size++; 
 	}
    
 	//Redimensionne la file. La capacite est multipliee par un facteur de resizeFactor.
@@ -61,6 +79,23 @@ public class ArrayQueue<AnyType> implements Queue<AnyType>
 	private void resize(int resizeFactor)
 	{
 		//A completer
+		
+		AnyType[] tabTemp = (AnyType[]) new Object[table.length * resizeFactor];
+		if (size < table.length * resizeFactor) { 
+			for (int i = 0; i <= size; i++) { 
+				tabTemp[i] = table[i]; 
+			}
+		}
+		else { 
+			for (int i = 0 ; i < tabTemp.length * resizeFactor ; i++) { 
+				tabTemp[i] = table[i]; 
+			}
+		}
+		
+		size *= resizeFactor; 
+		
+		table = tabTemp; 
+		
 		
 	}   
 }

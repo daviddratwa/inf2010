@@ -51,8 +51,10 @@ public class LinkedListQueue<AnyType> implements Queue<AnyType>
 	public AnyType peek()
 	{
 		//A completer
-		
-		
+		if (size != 0 )
+			return last.getData(); 
+		else return null; 
+	
 	}
 	
 	//Retire l'element en tete de file
@@ -68,6 +70,7 @@ public class LinkedListQueue<AnyType> implements Queue<AnyType>
 	public void push(AnyType item)
 	{		
 		//A completer
+		
 		
 	}  
 }
